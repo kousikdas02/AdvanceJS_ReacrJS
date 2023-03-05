@@ -38,3 +38,12 @@ function rollCall(student, index) {
 // console.log("my name is "+ na+" my age is "+age);
 // //es6
 // console.log(`my name is ${na} my age is ${age}`);
+
+
+// user.map((data,key)=>{
+
+//     return 
+//     <>
+
+//     </>
+// })

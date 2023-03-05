@@ -1,1 +1,7 @@
-module.export='khjhv';
+
+ const user=()=>{
+    return "hello"
+}
+
+export default user
+
