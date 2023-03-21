@@ -227,6 +227,134 @@ numtiplyTable(2)
 
 // QUESTION 10: How does this keyword work. Give example
 
+// “This” keyword refers to an object that is executing the current piece of code. It references the object that is executing the current function.
+
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+
+// ________________________________________________________________________________________________________
+
+// QUESTION 11: JSON stringfy, JSON parse, localStorage - setItem, getitem
+
+// The JSON.stringify() static method converts a JavaScript value to a JSON string
+console.log(JSON.stringify({ x: 5, y: 6 }));
+// Expected output: "{"x":5,"y":6}"
+
+// The JSON.parse() static method parses a JSON string, constructing the JavaScript value or object described by the string.
+const json = '{"result":true, "count":42}';
+const obj = JSON.parse(json);
+
+console.log(obj.count);
+// Expected output: 42
+
+// _____________________________
+
+// The localStorage object allows you to save key/value pairs in the browser.
+
+// It accesses the current domain's local Storage object and adds a data item to it using Storage.setItem().
+localStorage.setItem("myCat", "Tom");
+
+// Similarly we can read it from localStorage using getItem()
+const cat = localStorage.getItem("myCat");
+
+// The syntax for removing the localStorage item is as follows:
+localStorage.removeItem("myCat");
+
+// The syntax for removing all the localStorage items is as follows:
+localStorage.clear();
+
+
+
+
+// ________________________________________________________________________________________________________
+
+// QUESTION 12: Fetch data from api and show in browser
+async function getUsers() {
+  let url = 'https://jsonplaceholder.typicode.com/users';
+  let createHTML = '';
+  try {
+    let res = await fetch(url);
+    var userData = await res.json();
+    console.log(userData);
+  } catch (error) {
+    console.log(error);
+  }
+
+  userData.forEach((user) => {
+    let htmlSegment = `<div class="userDetails">
+                            <h2>${user.name}</h2>
+                            <p>ID: ${user.id}</p>
+                            <div class="email_details">
+                              <span>Email: </span>
+                              <a href="email:${user.email}">${user.email}</a>
+                            </div>
+                            <div class="phone_details">
+                              <span>Phone: </span>
+                              <a href="tel:+${user.phone}">${user.phone}</a>
+                            </div>
+                            <div class="address_details">
+                              <p>Street: ${user.address.street}</p>
+                              <p>Suite: ${user.address.suite}</p>
+                              <p>City: ${user.address.city}</p>
+                              <p>Zipcode: ${user.address.zipcode}</p>
+                              <p>Geo Location: ${user.address.geo}</p>
+                            </div>
+
+                            <div class="company_info">
+                              <p>Company Name: <b>${user.company.name}</b></p>
+                            </div>
+                        </div>`;
+
+    createHTML += htmlSegment;
+  });
+
+  let user = document.querySelector('.user');
+  user.innerHTML = createHTML;
+}
+getUsers();
+
+
+
+
+// ________________________________________________________________________________________________________
+
+// QUESTION 13: Explain event handeler like on change and submit
+
+// onClick - This event handler invokes a JavaScript code when a click action happens on an HTML element. E.g., when we click a button, a link is pushed, a checkbox checks or an image map is selected, it can trigger the onClick event handler.
+// Syntax:
+
+<htmlTag onclick="JavaScript Code need to be executed"></htmlTag>
+
+// The onsubmit event occurs when a form is submitted.
+// Syntax:
+{/* <form onsubmit="myFunction()">
+  Enter name: <input type="text">
+  <input type="submit">
+</form> */}
+
+
+// ________________________________________________________________________________________________________
+// QUESTION 14: Explain use of prevent default
+
+// The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
+const checkbox = document.querySelector("#id-checkbox");
+
+checkbox.addEventListener("click", checkboxClick, false);
+
+function checkboxClick(event) {
+  let warn = "preventDefault() won't let you check this!<br>";
+  document.getElementById("output-box").innerHTML += warn;
+  event.preventDefault();
+}
+
+
 
 
 
